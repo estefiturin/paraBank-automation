@@ -6,9 +6,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BasePage {
 
@@ -18,7 +21,7 @@ public class BasePage {
     protected static WebDriver driver;
 
     // se utiliza para esperar que se den condiciones especificas en una página web
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(2000));
 
     static {
         // descargar el ChromeDriver para la versión actual
@@ -73,6 +76,46 @@ public class BasePage {
     public String findText(By locator) {
         wait.until(ExpectedConditions.presenceOfElementLocated(locator));
         return driver.findElement(locator).getText();
+    }
+
+    // DROPDOWN
+    public void selectFromDropdownByValue(By locator) {
+        // creo instancia de dropdown
+        Select dropdown = new Select(driver.findElement(locator));
+
+        dropdown.selectByVisibleText("SAVINGS");
+
+    }
+
+    public void selectFromDropdownByIndex(By locator, Integer index) {
+        // creo instancia de dropdown
+        Select dropdown = new Select(driver.findElement(locator));
+
+        dropdown.selectByIndex(index);
+
+    }
+
+    public int dropdownSize(String locator) {
+        Select dropdown = new Select(Find(locator));
+
+        List<WebElement> dropdownOptions = dropdown.getOptions();
+
+        return dropdownOptions.size();
+    }
+
+    // Método para devolver todos los valores del dropdown
+    public List<String> getDropdownValues(String locator) {
+        Select dropdown = new Select(Find(locator));
+
+        List<WebElement> dropdownOptions = dropdown.getOptions();
+        List<String> values = new ArrayList<>();
+
+        for (WebElement option : dropdownOptions) {
+            values.add(option.getText());
+        }
+
+        return values;
+
     }
 
 }

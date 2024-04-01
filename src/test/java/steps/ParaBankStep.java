@@ -4,7 +4,9 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import pages.BasePage;
+import pages.PaginaNuevaCuenta;
 import pages.PaginaPrincipal;
 import pages.PaginaRegistro;
 
@@ -14,6 +16,8 @@ public class ParaBankStep {
 
     PaginaPrincipal landingPage = new PaginaPrincipal();
     PaginaRegistro registerPage = new PaginaRegistro();
+
+    PaginaNuevaCuenta cuentaPage = new PaginaNuevaCuenta();
 
     // navagamos al sitio web
     @Given("navegar www.parabank.com")
@@ -54,6 +58,32 @@ public class ParaBankStep {
         registerPage.cleanDriver();
     }
 
+    @When("el usuario ingresa a su cuenta de usuario")
+    public void ingresarCuentaUsuario() {
+        cuentaPage.writeUsername("matildetorino");
+        cuentaPage.writePassword("password");
+        cuentaPage.clickButtonLogin();
+    }
+
+    @And("selecciona 'Open New Account'")
+    public void clickOpenNewAccount() {
+        cuentaPage.clickOpenNewAccount();
+    }
+
+    @And("selecciona el tipo de cuenta que desea")
+    public void seleccionarTipoDeCuenta() {
+        cuentaPage.selectTipoCuentaId();
+    }
+
+    @And("clickea el boton 'Open new account'")
+    public void clickButtonOpenNewAccount() {
+        cuentaPage.clickButtonSubmit();
+    }
+
+    @Then("el sistema muestra el mensaje 'Congratulations, your account is now open.'")
+    public void mostrarMensajeConfirmacion() {
+        assertTrue(cuentaPage.encontrarMensajeRegistrado().contains( "Congratulations, your account is now open."));
+    }
 
 
 }

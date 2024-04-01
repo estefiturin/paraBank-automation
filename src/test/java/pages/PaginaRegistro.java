@@ -18,7 +18,7 @@ public class PaginaRegistro extends BasePage{
     private By usernameId = By.id("customer.username");
     private By passwordId = By.id("customer.password");
     private By passwordConfirmId = By.id("repeatedPassword");
-    private By botonSubmit = By.xpath("//input[@value='Register']");
+    private By botonSubmit = By.xpath("(//INPUT[@type='submit'])[2]");
 
     private By registrado = By.xpath("//p[contains(text(),'Your account was created successfully. You are now')]");
 
