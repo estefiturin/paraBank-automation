@@ -3,6 +3,7 @@ package runner;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.AfterClass;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.runner.RunWith;
 import pages.BasePage;
 
@@ -10,12 +11,9 @@ import pages.BasePage;
 @CucumberOptions(features = "src/test/resources",
                 glue = "src/test/java/steps",
                 plugin = { "pretty", "html:target/cucumber-reports"},
-                tags = "@Navigation")
+                tags = "@GestionarCuenta")
 public class TestRunner {
 
-    @AfterClass
-    public static void cleanDriver() {
-        BasePage.closeBrowser();
-    }
+
 
 }
