@@ -5,10 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import pages.BasePage;
-import pages.PaginaNuevaCuenta;
-import pages.PaginaPrincipal;
-import pages.PaginaRegistro;
+import pages.*;
 
 import static org.junit.Assert.assertTrue;
 
@@ -18,6 +15,8 @@ public class ParaBankStep {
     PaginaRegistro registerPage = new PaginaRegistro();
 
     PaginaNuevaCuenta cuentaPage = new PaginaNuevaCuenta();
+
+    PaginaResumen resumenPage = new PaginaResumen();
 
     // navagamos al sitio web
     @Given("navegar www.parabank.com")
@@ -85,5 +84,14 @@ public class ParaBankStep {
         assertTrue(cuentaPage.encontrarMensajeRegistrado().contains( "Congratulations, your account is now open."));
     }
 
+    @And("clickea el boton 'Accounts Overview'")
+    public void clickButtonAccountOverview() {
+        resumenPage.clickAccountOverview();
+    }
+
+    @Then("el sistema muestra el mensaje '*Balance includes deposits that may be subject to holds'")
+    public void mostrarMensajeAccount() {
+        assertTrue(resumenPage.messageConfirmAccount().contains( "*Balance includes deposits that may be subject to holds"));
+    }
 
 }

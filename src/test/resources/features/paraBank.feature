@@ -17,3 +17,9 @@ Feature: GestionarCuentas
       And selecciona el tipo de cuenta que desea
       And clickea el boton 'Open new account'
       Then el sistema muestra el mensaje 'Congratulations, your account is now open.'
+
+    @AccountSummary
+    Scenario: Validar estado del resumen de cuenta
+      When el usuario ingresa a su cuenta de usuario
+      And clickea el boton 'Accounts Overview'
+      Then el sistema muestra el mensaje '*Balance includes deposits that may be subject to holds'
