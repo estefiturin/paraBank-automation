@@ -23,3 +23,5 @@ Feature: GestionarCuentas
       When el usuario ingresa a su cuenta de usuario
       And clickea el boton 'Accounts Overview'
       Then el sistema muestra el mensaje '*Balance includes deposits that may be subject to holds'
+
+
