@@ -39,6 +39,7 @@ public class PaginaNuevaCuenta extends BasePage {
 
     public void selectTipoCuentaId() {
         selectFromDropdownByValue(tipoCuentaId);
+
     }
 
     public void clickButtonSubmit() {
